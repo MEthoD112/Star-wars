@@ -1,0 +1,7 @@
+<button (click)="goToList()">Go back</button>
+<div *ngIf="person$ | async as person" class="person-details-wrapper">
+  <span>Person Name: {{person?.name}}</span>
+  <span>Person Gender: {{person?.gender}}</span>
+  <span>Person Birth Year: {{person?.birth_year}}</span>
+  <span>Person Eye color: {{person?.eye_color}}</span>
+</div>

@@ -1,0 +1,11 @@
+.wrapper {
+  height: calc(100vh - 200px);
+  padding: 20px;
+  ul {
+    height: 100%;
+    overflow-y: auto;
+    li {
+      margin: 20px 10px 0 10px;
+    }
+  }
+}

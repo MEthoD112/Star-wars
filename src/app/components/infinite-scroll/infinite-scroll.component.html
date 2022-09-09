@@ -1,0 +1,13 @@
+<div *ngIf="scroll$ | async"></div>
+<div class="wrapper">
+  <ul #scrollableContainer>
+    <li *ngFor="let item of items$ | async; let index = index">
+      <app-person-list-item
+        [person]="item"
+        [index]="index"
+        (personClick)="goToDetailsPage($event)"
+      >
+      </app-person-list-item>
+    </li>
+  </ul>
+</div>
