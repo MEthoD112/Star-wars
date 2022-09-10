@@ -1,9 +1,12 @@
 import {Inject, Injectable} from '@angular/core';
-import {catchError, EMPTY, Observable} from "rxjs";
+import {BehaviorSubject, catchError, concatAll, concatMap, EMPTY, Observable, scan, shareReplay} from "rxjs";
 import {HttpClient} from "@angular/common/http";
+import {Person} from "../interfaces/person.interface";
 
 @Injectable()
-export class ItemService {
+export class ItemService<T = Person> {
+  public currentItems$: BehaviorSubject<number[]> = new BehaviorSubject<number[]>([0]);
+  public items$: Observable<T[]>;
   constructor(
     @Inject('BASE_API_URL') private baseUrl: string,
     private http: HttpClient
@@ -14,6 +17,15 @@ export class ItemService {
       .pipe(
         catchError(() => EMPTY)
     )
+  }
+
+  public initItems(apiType: string): void {
+    this.items$ = this.currentItems$.pipe(
+      concatAll(),
+      concatMap(index => this.getItem<T>(index, apiType)),
+      scan((items: T[], current) => items.concat(current), []),
+      shareReplay(1)
+    );
   }
 }
 

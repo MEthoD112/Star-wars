@@ -1,7 +1,6 @@
-<div *ngIf="scroll$ | async"></div>
 <div class="wrapper">
   <ul #scrollableContainer>
-    <li *ngFor="let item of items$ | async; let index = index">
+    <li *ngFor="let item of itemService.items$ | async; let index = index">
       <app-person-list-item
         [person]="item"
         [index]="index"

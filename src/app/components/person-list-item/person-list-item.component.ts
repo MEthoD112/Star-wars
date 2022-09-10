@@ -10,9 +10,9 @@ import {Person} from "../../interfaces/person.interface";
 export class PersonListItemComponent<T extends Partial<Person>> {
   @Input() public person: T;
   @Input() public index = 0;
-  @Output() public personClick = new EventEmitter<any>();
+  @Output() public personClick = new EventEmitter<string>();
 
   public onPersonClick(): void {
-    this.personClick.emit(this.person);
+    this.personClick.emit(this.person.url);
   }
 }
